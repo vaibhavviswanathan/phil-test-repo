@@ -10,4 +10,8 @@ function multiply(a, b) {
   return a * b;
 }
 
-module.exports = { add, subtract, multiply };
+function sqrt(x) {
+  return Math.sqrt(x);
+}
+
+module.exports = { add, subtract, multiply, sqrt };
