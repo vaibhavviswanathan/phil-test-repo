@@ -1,6 +1,6 @@
 const { describe, it } = require("node:test");
 const assert = require("node:assert");
-const { add, subtract, multiply } = require("./math");
+const { add, subtract, multiply, modulo } = require("./math");
 
 describe("math", () => {
   it("adds two numbers", () => {
@@ -13,5 +13,9 @@ describe("math", () => {
 
   it("multiplies two numbers", () => {
     assert.strictEqual(multiply(5, 6), 30);
+  });
+
+  it("returns modulo of two numbers", () => {
+    assert.strictEqual(modulo(10, 3), 1);
   });
 });
