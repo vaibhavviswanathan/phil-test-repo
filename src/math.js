@@ -10,19 +10,31 @@ function multiply(a, b) {
   return a * b;
 }
 
-/**
- * Calculates the square root of a number
- * @param {number} x - The number to calculate the square root for
- * @returns {number} The square root of x, or NaN for negative numbers
- * 
- * Logic for different cases:
- * - Positive numbers: Returns the mathematical square root (e.g., sqrt(4) = 2)
- * - Zero: Returns 0 (sqrt(0) = 0)  
- * - Negative numbers: Returns NaN since square root of negative numbers is undefined in real numbers
- * - Decimal numbers: Returns the precise square root (e.g., sqrt(2.25) = 1.5)
- */
 function sqrt(x) {
   return Math.sqrt(x);
 }
 
-module.exports = { add, subtract, multiply, sqrt };
+function factorial(n) {
+  if (typeof n !== 'number') {
+    throw new TypeError('Input must be a number');
+  }
+  if (!Number.isInteger(n)) {
+    throw new Error('Input must be an integer');
+  }
+  if (n < 0) {
+    throw new Error('Input must be a non-negative integer');
+  }
+  if (n > 170) {
+    throw new Error('Input too large - factorial would exceed JavaScript number limits');
+  }
+  if (n === 0 || n === 1) {
+    return 1;
+  }
+  let result = 1;
+  for (let i = 2; i <= n; i++) {
+    result *= i;
+  }
+  return result;
+}
+
+module.exports = { add, subtract, multiply, sqrt, factorial };
