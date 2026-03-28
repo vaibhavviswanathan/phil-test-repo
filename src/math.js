@@ -10,7 +10,28 @@ function multiply(a, b) {
   return a * b;
 }
 
+function divide(a, b) {
+  if (b === 0) {
+    throw new Error('Cannot divide by zero');
+  }
+  return a / b;
+}
+
+function power(base, exponent) {
+  return Math.pow(base, exponent);
+}
+
+function modulo(a, b) {
+  if (b === 0) {
+    throw new Error('Cannot modulo by zero');
+  }
+  return a % b;
+}
+
 function sqrt(x) {
+  if (x < 0) {
+    throw new Error('Cannot take square root of negative number');
+  }
   return Math.sqrt(x);
 }
 
@@ -37,4 +58,4 @@ function factorial(n) {
   return result;
 }
 
-module.exports = { add, subtract, multiply, sqrt, factorial };
+module.exports = { add, subtract, multiply, divide, power, modulo, sqrt, factorial };
