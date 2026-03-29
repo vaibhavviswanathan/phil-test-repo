@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Math Demo</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Interactive Math Demo</h1>
+        
+        <!-- Addition -->
+        <div class="operation-card">
+            <h2>Addition</h2>
+            <form id="add-form">
+                <input type="number" id="add-a" placeholder="First number" required>
+                <input type="number" id="add-b" placeholder="Second number" required>
+                <button type="submit">Add</button>
+            </form>
+            <div id="add-result" class="result"></div>
+        </div>
+
+        <!-- Subtraction -->
+        <div class="operation-card">
+            <h2>Subtraction</h2>
+            <form id="subtract-form">
+                <input type="number" id="subtract-a" placeholder="First number" required>
+                <input type="number" id="subtract-b" placeholder="Second number" required>
+                <button type="submit">Subtract</button>
+            </form>
+            <div id="subtract-result" class="result"></div>
+        </div>
+
+        <!-- Multiplication -->
+        <div class="operation-card">
+            <h2>Multiplication</h2>
+            <form id="multiply-form">
+                <input type="number" id="multiply-a" placeholder="First number" required>
+                <input type="number" id="multiply-b" placeholder="Second number" required>
+                <button type="submit">Multiply</button>
+            </form>
+            <div id="multiply-result" class="result"></div>
+        </div>
+
+        <!-- Division -->
+        <div class="operation-card">
+            <h2>Division</h2>
+            <form id="divide-form">
+                <input type="number" id="divide-a" placeholder="Dividend" required>
+                <input type="number" id="divide-b" placeholder="Divisor" required>
+                <button type="submit">Divide</button>
+            </form>
+            <div id="divide-result" class="result"></div>
+        </div>
+
+        <!-- Power -->
+        <div class="operation-card">
+            <h2>Power</h2>
+            <form id="power-form">
+                <input type="number" id="power-base" placeholder="Base" required>
+                <input type="number" id="power-exponent" placeholder="Exponent" required>
+                <button type="submit">Calculate Power</button>
+            </form>
+            <div id="power-result" class="result"></div>
+        </div>
+
+        <!-- Modulo -->
+        <div class="operation-card">
+            <h2>Modulo</h2>
+            <form id="modulo-form">
+                <input type="number" id="modulo-a" placeholder="Dividend" required>
+                <input type="number" id="modulo-b" placeholder="Divisor" required>
+                <button type="submit">Calculate Modulo</button>
+            </form>
+            <div id="modulo-result" class="result"></div>
+        </div>
+
+        <!-- Square Root -->
+        <div class="operation-card">
+            <h2>Square Root</h2>
+            <form id="sqrt-form">
+                <input type="number" id="sqrt-x" placeholder="Number" min="0" required>
+                <button type="submit">Calculate Square Root</button>
+            </form>
+            <div id="sqrt-result" class="result"></div>
+        </div>
+
+        <!-- Factorial -->
+        <div class="operation-card">
+            <h2>Factorial</h2>
+            <form id="factorial-form">
+                <input type="number" id="factorial-n" placeholder="Number" min="0" max="170" step="1" required>
+                <button type="submit">Calculate Factorial</button>
+            </form>
+            <div id="factorial-result" class="result"></div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
