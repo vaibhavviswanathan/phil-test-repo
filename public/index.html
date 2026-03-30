@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Math Demo</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Math Function Demo</h1>
+    <p>Test all math utility functions interactively</p>
+  </header>
+
+  <main>
+    <!-- Add -->
+    <div class="card">
+      <h2>Add <span class="op">a + b</span></h2>
+      <form data-op="add">
+        <div class="inputs">
+          <input type="number" name="a" placeholder="a" required />
+          <input type="number" name="b" placeholder="b" required />
+        </div>
+        <button type="submit">Calculate</button>
+        <div class="result hidden"></div>
+      </form>
+    </div>
+
+    <!-- Subtract -->
+    <div class="card">
+      <h2>Subtract <span class="op">a − b</span></h2>
+      <form data-op="subtract">
+        <div class="inputs">
+          <input type="number" name="a" placeholder="a" required />
+          <input type="number" name="b" placeholder="b" required />
+        </div>
+        <button type="submit">Calculate</button>
+        <div class="result hidden"></div>
+      </form>
+    </div>
+
+    <!-- Multiply -->
+    <div class="card">
+      <h2>Multiply <span class="op">a × b</span></h2>
+      <form data-op="multiply">
+        <div class="inputs">
+          <input type="number" name="a" placeholder="a" required />
+          <input type="number" name="b" placeholder="b" required />
+        </div>
+        <button type="submit">Calculate</button>
+        <div class="result hidden"></div>
+      </form>
+    </div>
+
+    <!-- Divide -->
+    <div class="card">
+      <h2>Divide <span class="op">a ÷ b</span></h2>
+      <form data-op="divide">
+        <div class="inputs">
+          <input type="number" name="a" placeholder="a" required />
+          <input type="number" name="b" placeholder="b" required />
+        </div>
+        <button type="submit">Calculate</button>
+        <div class="result hidden"></div>
+      </form>
+    </div>
+
+    <!-- Power -->
+    <div class="card">
+      <h2>Power <span class="op">a ^ b</span></h2>
+      <form data-op="power">
+        <div class="inputs">
+          <input type="number" name="a" placeholder="base (a)" required />
+          <input type="number" name="b" placeholder="exponent (b)" required />
+        </div>
+        <button type="submit">Calculate</button>
+        <div class="result hidden"></div>
+      </form>
+    </div>
+
+    <!-- Modulo -->
+    <div class="card">
+      <h2>Modulo <span class="op">a % b</span></h2>
+      <form data-op="modulo">
+        <div class="inputs">
+          <input type="number" name="a" placeholder="a" required />
+          <input type="number" name="b" placeholder="b" required />
+        </div>
+        <button type="submit">Calculate</button>
+        <div class="result hidden"></div>
+      </form>
+    </div>
+
+    <!-- Square Root -->
+    <div class="card">
+      <h2>Square Root <span class="op">√a</span></h2>
+      <form data-op="sqrt">
+        <div class="inputs single">
+          <input type="number" name="a" placeholder="a" required />
+        </div>
+        <button type="submit">Calculate</button>
+        <div class="result hidden"></div>
+      </form>
+    </div>
+
+    <!-- Factorial -->
+    <div class="card">
+      <h2>Factorial <span class="op">a!</span></h2>
+      <form data-op="factorial">
+        <div class="inputs single">
+          <input type="number" name="a" placeholder="a (integer ≥ 0)" step="1" min="0" max="170" required />
+        </div>
+        <button type="submit">Calculate</button>
+        <div class="result hidden"></div>
+      </form>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

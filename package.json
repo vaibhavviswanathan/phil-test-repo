@@ -4,8 +4,11 @@
   "description": "A simple Node.js project for testing Phil AI coding agent",
   "main": "src/index.js",
   "scripts": {
-    "start": "node src/index.js",
+    "start": "node src/server.js",
     "test": "node --test src/**/*.test.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
   },
   "license": "MIT"
 }
