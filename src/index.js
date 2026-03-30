@@ -1,6 +1,11 @@
-const { add, subtract, multiply } = require("./math");
+const express = require('express');
+const path = require('path');
 
-console.log("Phil Test Repo");
-console.log(`2 + 3 = ${add(2, 3)}`);
-console.log(`10 - 4 = ${subtract(10, 4)}`);
-console.log(`5 * 6 = ${multiply(5, 6)}`);
+const app = express();
+const PORT = 8080;
+
+app.use(express.static(path.join(__dirname, '..', 'public')));
+
+app.listen(PORT, () => {
+  console.log(`Calculator app running at http://localhost:${PORT}`);
+});

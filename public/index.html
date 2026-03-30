@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="calculator">
+    <div class="display">
+      <div id="expression"></div>
+      <div id="result">0</div>
+    </div>
+    <div class="buttons">
+      <button class="btn btn-wide" onclick="clearAll()">AC</button>
+      <button class="btn" onclick="toggleSign()">+/-</button>
+      <button class="btn" onclick="appendOp('sqrt')">√</button>
+      <button class="btn btn-op" onclick="appendOp('/')">÷</button>
+
+      <button class="btn" onclick="appendNum('7')">7</button>
+      <button class="btn" onclick="appendNum('8')">8</button>
+      <button class="btn" onclick="appendNum('9')">9</button>
+      <button class="btn btn-op" onclick="appendOp('*')">×</button>
+
+      <button class="btn" onclick="appendNum('4')">4</button>
+      <button class="btn" onclick="appendNum('5')">5</button>
+      <button class="btn" onclick="appendNum('6')">6</button>
+      <button class="btn btn-op" onclick="appendOp('-')">−</button>
+
+      <button class="btn" onclick="appendNum('1')">1</button>
+      <button class="btn" onclick="appendNum('2')">2</button>
+      <button class="btn" onclick="appendNum('3')">3</button>
+      <button class="btn btn-op" onclick="appendOp('+')">+</button>
+
+      <button class="btn" onclick="appendOp('!')">n!</button>
+      <button class="btn" onclick="appendNum('0')">0</button>
+      <button class="btn" onclick="appendDot()">.</button>
+      <button class="btn btn-eq" onclick="calculate()">=</button>
+    </div>
+  </div>
+
+  <script>
+    // Math functions (mirroring src/math.js)
+    function add(a, b) { return a + b; }
+    function subtract(a, b) { return a - b; }
+    function multiply(a, b) { return a * b; }
+    function divide(a, b) {
+      if (b === 0) throw new Error('Division by zero');
+      return a / b;
+    }
+    function sqrt(x) {
+      if (x < 0) throw new Error('Cannot take sqrt of negative number');
+      return Math.sqrt(x);
+    }
+    function factorial(n) {
+      if (!Number.isInteger(n) || n < 0) throw new Error('Factorial requires a non-negative integer');
+      if (n > 170) throw new Error('Input too large');
+      if (n === 0 || n === 1) return 1;
+      let result = 1;
+      for (let i = 2; i <= n; i++) result *= i;
+      return result;
+    }
+
+    let current = '';
+    let pendingOp = null;
+    let pendingVal = null;
+    let justEvaled = false;
+
+    function updateDisplay(val) {
+      document.getElementById('result').textContent = val;
+    }
+
+    function updateExpression(val) {
+      document.getElementById('expression').textContent = val;
+    }
+
+    function appendNum(n) {
+      if (justEvaled) { current = ''; justEvaled = false; }
+      current += n;
+      updateDisplay(current);
+    }
+
+    function appendDot() {
+      if (justEvaled) { current = '0'; justEvaled = false; }
+      if (!current.includes('.')) current += (current === '' ? '0' : '') + '.';
+      updateDisplay(current);
+    }
+
+    function appendOp(op) {
+      if (op === 'sqrt') {
+        const val = parseFloat(current || 0);
+        try {
+          const res = sqrt(val);
+          updateExpression(`√(${val})`);
+          current = String(res);
+          updateDisplay(current);
+          justEvaled = true;
+        } catch(e) { updateDisplay('Error'); current = ''; }
+        return;
+      }
+      if (op === '!') {
+        const val = parseFloat(current || 0);
+        try {
+          const res = factorial(val);
+          updateExpression(`${val}!`);
+          current = String(res);
+          updateDisplay(current);
+          justEvaled = true;
+        } catch(e) { updateDisplay('Error'); current = ''; }
+        return;
+      }
+      if (current !== '') {
+        if (pendingOp !== null) {
+          const a = pendingVal, b = parseFloat(current);
+          try {
+            let res;
+            if (pendingOp === '+') res = add(a, b);
+            else if (pendingOp === '-') res = subtract(a, b);
+            else if (pendingOp === '*') res = multiply(a, b);
+            else if (pendingOp === '/') res = divide(a, b);
+            pendingVal = res;
+            current = '';
+            updateDisplay(res);
+          } catch(e) { updateDisplay('Error'); clearAll(); return; }
+        } else {
+          pendingVal = parseFloat(current);
+          current = '';
+        }
+      }
+      pendingOp = op;
+      updateExpression(`${pendingVal} ${op === '*' ? '×' : op === '/' ? '÷' : op}`);
+      justEvaled = false;
+    }
+
+    function calculate() {
+      if (pendingOp === null || current === '') return;
+      const a = pendingVal, b = parseFloat(current);
+      try {
+        let res;
+        if (pendingOp === '+') res = add(a, b);
+        else if (pendingOp === '-') res = subtract(a, b);
+        else if (pendingOp === '*') res = multiply(a, b);
+        else if (pendingOp === '/') res = divide(a, b);
+        updateExpression(`${a} ${pendingOp === '*' ? '×' : pendingOp === '/' ? '÷' : pendingOp} ${b} =`);
+        current = String(res);
+        updateDisplay(current);
+        pendingOp = null;
+        pendingVal = null;
+        justEvaled = true;
+      } catch(e) { updateDisplay('Error'); clearAll(); }
+    }
+
+    function clearAll() {
+      current = '';
+      pendingOp = null;
+      pendingVal = null;
+      justEvaled = false;
+      updateDisplay('0');
+      updateExpression('');
+    }
+
+    function toggleSign() {
+      if (current !== '' && current !== '0') {
+        current = current.startsWith('-') ? current.slice(1) : '-' + current;
+        updateDisplay(current);
+      }
+    }
+  </script>
+</body>
+</html>
