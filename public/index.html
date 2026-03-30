@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interactive Math App</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Interactive Math App</h1>
+
+    <div class="operations-grid">
+
+      <div class="card">
+        <h2>Add</h2>
+        <div class="inputs">
+          <input type="number" id="add-a" placeholder="a" />
+          <input type="number" id="add-b" placeholder="b" />
+        </div>
+        <button onclick="calc('add')">Calculate</button>
+        <div class="result" id="add-result"></div>
+      </div>
+
+      <div class="card">
+        <h2>Subtract</h2>
+        <div class="inputs">
+          <input type="number" id="subtract-a" placeholder="a" />
+          <input type="number" id="subtract-b" placeholder="b" />
+        </div>
+        <button onclick="calc('subtract')">Calculate</button>
+        <div class="result" id="subtract-result"></div>
+      </div>
+
+      <div class="card">
+        <h2>Multiply</h2>
+        <div class="inputs">
+          <input type="number" id="multiply-a" placeholder="a" />
+          <input type="number" id="multiply-b" placeholder="b" />
+        </div>
+        <button onclick="calc('multiply')">Calculate</button>
+        <div class="result" id="multiply-result"></div>
+      </div>
+
+      <div class="card">
+        <h2>Divide</h2>
+        <div class="inputs">
+          <input type="number" id="divide-a" placeholder="a" />
+          <input type="number" id="divide-b" placeholder="b" />
+        </div>
+        <button onclick="calc('divide')">Calculate</button>
+        <div class="result" id="divide-result"></div>
+      </div>
+
+      <div class="card">
+        <h2>Power</h2>
+        <div class="inputs">
+          <input type="number" id="power-a" placeholder="base" />
+          <input type="number" id="power-b" placeholder="exponent" />
+        </div>
+        <button onclick="calc('power')">Calculate</button>
+        <div class="result" id="power-result"></div>
+      </div>
+
+      <div class="card">
+        <h2>Modulo</h2>
+        <div class="inputs">
+          <input type="number" id="modulo-a" placeholder="a" />
+          <input type="number" id="modulo-b" placeholder="b" />
+        </div>
+        <button onclick="calc('modulo')">Calculate</button>
+        <div class="result" id="modulo-result"></div>
+      </div>
+
+      <div class="card">
+        <h2>Square Root</h2>
+        <div class="inputs single">
+          <input type="number" id="sqrt-x" placeholder="x" />
+        </div>
+        <button onclick="calcSingle('sqrt', 'x')">Calculate</button>
+        <div class="result" id="sqrt-result"></div>
+      </div>
+
+      <div class="card">
+        <h2>Factorial</h2>
+        <div class="inputs single">
+          <input type="number" id="factorial-n" placeholder="n" min="0" step="1" />
+        </div>
+        <button onclick="calcSingle('factorial', 'n')">Calculate</button>
+        <div class="result" id="factorial-result"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    async function calc(op) {
+      const a = document.getElementById(`${op}-a`).value;
+      const b = document.getElementById(`${op}-b`).value;
+      const resultEl = document.getElementById(`${op}-result`);
+      try {
+        const res = await fetch(`/api/${op}?a=${encodeURIComponent(a)}&b=${encodeURIComponent(b)}`);
+        const data = await res.json();
+        if (data.error) {
+          resultEl.textContent = `Error: ${data.error}`;
+          resultEl.className = "result error";
+        } else {
+          resultEl.textContent = `= ${data.result}`;
+          resultEl.className = "result success";
+        }
+      } catch (e) {
+        resultEl.textContent = "Network error";
+        resultEl.className = "result error";
+      }
+    }
+
+    async function calcSingle(op, param) {
+      const val = document.getElementById(`${op}-${param}`).value;
+      const resultEl = document.getElementById(`${op}-result`);
+      try {
+        const res = await fetch(`/api/${op}?${param}=${encodeURIComponent(val)}`);
+        const data = await res.json();
+        if (data.error) {
+          resultEl.textContent = `Error: ${data.error}`;
+          resultEl.className = "result error";
+        } else {
+          resultEl.textContent = `= ${data.result}`;
+          resultEl.className = "result success";
+        }
+      } catch (e) {
+        resultEl.textContent = "Network error";
+        resultEl.className = "result error";
+      }
+    }
+  </script>
+</body>
+</html>
