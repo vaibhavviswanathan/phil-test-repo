@@ -3,169 +3,198 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Calculator</title>
+  <title>Calculator — My Workspace</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="calculator">
-    <div class="display">
-      <div id="expression"></div>
-      <div id="result">0</div>
-    </div>
-    <div class="buttons">
-      <button class="btn btn-wide" onclick="clearAll()">AC</button>
-      <button class="btn" onclick="toggleSign()">+/-</button>
-      <button class="btn" onclick="appendOp('sqrt')">√</button>
-      <button class="btn btn-op" onclick="appendOp('/')">÷</button>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="workspace-info">
+          <div class="workspace-icon">W</div>
+          <span class="workspace-name">My Workspace</span>
+        </div>
+        <button class="collapse-btn" id="collapseBtn" title="Close sidebar">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 12h18M3 6h18M3 18h18"/>
+          </svg>
+        </button>
+      </div>
 
-      <button class="btn" onclick="appendNum('7')">7</button>
-      <button class="btn" onclick="appendNum('8')">8</button>
-      <button class="btn" onclick="appendNum('9')">9</button>
-      <button class="btn btn-op" onclick="appendOp('*')">×</button>
+      <div class="sidebar-section">
+        <div class="sidebar-item" data-page="search">
+          <svg class="item-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+          </svg>
+          Search
+        </div>
+        <div class="sidebar-item" data-page="home">
+          <svg class="item-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+          Home
+        </div>
+        <div class="sidebar-item" data-page="inbox">
+          <svg class="item-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/>
+            <path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/>
+          </svg>
+          Inbox
+        </div>
+      </div>
 
-      <button class="btn" onclick="appendNum('4')">4</button>
-      <button class="btn" onclick="appendNum('5')">5</button>
-      <button class="btn" onclick="appendNum('6')">6</button>
-      <button class="btn btn-op" onclick="appendOp('-')">−</button>
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">Favorites</div>
+        <div class="sidebar-item active" data-page="calculator">
+          <svg class="item-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/>
+            <line x1="8" y1="10" x2="10" y2="10"/><line x1="14" y1="10" x2="16" y2="10"/>
+            <line x1="8" y1="14" x2="10" y2="14"/><line x1="14" y1="14" x2="16" y2="14"/>
+            <line x1="8" y1="18" x2="10" y2="18"/><line x1="14" y1="18" x2="16" y2="18"/>
+          </svg>
+          Calculator
+        </div>
+      </div>
 
-      <button class="btn" onclick="appendNum('1')">1</button>
-      <button class="btn" onclick="appendNum('2')">2</button>
-      <button class="btn" onclick="appendNum('3')">3</button>
-      <button class="btn btn-op" onclick="appendOp('+')">+</button>
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">Pages</div>
+        <div class="sidebar-item" data-page="notes">
+          <svg class="item-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
+          </svg>
+          Notes
+        </div>
+        <div class="sidebar-item" data-page="tasks">
+          <svg class="item-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9 11 12 14 22 4"/>
+            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+          </svg>
+          Tasks
+        </div>
+        <div class="sidebar-item" data-page="settings">
+          <svg class="item-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/>
+          </svg>
+          Settings &amp; Members
+        </div>
+      </div>
 
-      <button class="btn" onclick="appendOp('!')">n!</button>
-      <button class="btn" onclick="appendNum('0')">0</button>
-      <button class="btn" onclick="appendDot()">.</button>
-      <button class="btn btn-eq" onclick="calculate()">=</button>
-    </div>
+      <div class="sidebar-footer">
+        <button class="new-page-btn" id="newPageBtn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+          </svg>
+          New page
+        </button>
+      </div>
+    </aside>
+
+    <!-- Sidebar toggle when collapsed -->
+    <button class="sidebar-open-btn" id="sidebarOpenBtn" title="Open sidebar">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M3 12h18M3 6h18M3 18h18"/>
+      </svg>
+    </button>
+
+    <!-- Main content -->
+    <main class="main-content" id="mainContent">
+      <div class="topbar">
+        <div class="breadcrumb">
+          <span class="breadcrumb-item">My Workspace</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+          <span class="breadcrumb-item active">Calculator</span>
+        </div>
+        <div class="topbar-actions">
+          <button class="topbar-btn" id="themeToggle" title="Toggle theme">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="5"/>
+              <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+              <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            </svg>
+          </button>
+          <button class="topbar-btn" title="Share">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+            </svg>
+          </button>
+          <button class="topbar-btn" title="More options">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="page-body">
+        <div class="page-header">
+          <div class="page-emoji">🧮</div>
+          <h1 class="page-title" contenteditable="true" spellcheck="false">Calculator</h1>
+          <p class="page-subtitle">A simple scientific calculator</p>
+        </div>
+
+        <div class="page-content">
+          <div class="calculator-card">
+            <div class="display">
+              <div id="expression"></div>
+              <div id="result">0</div>
+            </div>
+            <div class="buttons">
+              <button class="btn btn-wide" onclick="clearAll()">AC</button>
+              <button class="btn" onclick="toggleSign()">+/−</button>
+              <button class="btn" onclick="appendOp('sqrt')">√</button>
+              <button class="btn btn-op" onclick="appendOp('/')">÷</button>
+
+              <button class="btn" onclick="appendNum('7')">7</button>
+              <button class="btn" onclick="appendNum('8')">8</button>
+              <button class="btn" onclick="appendNum('9')">9</button>
+              <button class="btn btn-op" onclick="appendOp('*')">×</button>
+
+              <button class="btn" onclick="appendNum('4')">4</button>
+              <button class="btn" onclick="appendNum('5')">5</button>
+              <button class="btn" onclick="appendNum('6')">6</button>
+              <button class="btn btn-op" onclick="appendOp('-')">−</button>
+
+              <button class="btn" onclick="appendNum('1')">1</button>
+              <button class="btn" onclick="appendNum('2')">2</button>
+              <button class="btn" onclick="appendNum('3')">3</button>
+              <button class="btn btn-op" onclick="appendOp('+')">+</button>
+
+              <button class="btn" onclick="appendOp('!')">n!</button>
+              <button class="btn" onclick="appendNum('0')">0</button>
+              <button class="btn" onclick="appendDot()">.</button>
+              <button class="btn btn-eq" onclick="calculate()">=</button>
+            </div>
+          </div>
+
+          <div class="history-section">
+            <div class="history-header">
+              <span>History</span>
+              <button class="clear-history-btn" id="clearHistoryBtn">Clear</button>
+            </div>
+            <div class="history-list" id="historyList">
+              <div class="history-empty">No calculations yet</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
   </div>
 
-  <script>
-    // Math functions (mirroring src/math.js)
-    function add(a, b) { return a + b; }
-    function subtract(a, b) { return a - b; }
-    function multiply(a, b) { return a * b; }
-    function divide(a, b) {
-      if (b === 0) throw new Error('Division by zero');
-      return a / b;
-    }
-    function sqrt(x) {
-      if (x < 0) throw new Error('Cannot take sqrt of negative number');
-      return Math.sqrt(x);
-    }
-    function factorial(n) {
-      if (!Number.isInteger(n) || n < 0) throw new Error('Factorial requires a non-negative integer');
-      if (n > 170) throw new Error('Input too large');
-      if (n === 0 || n === 1) return 1;
-      let result = 1;
-      for (let i = 2; i <= n; i++) result *= i;
-      return result;
-    }
-
-    let current = '';
-    let pendingOp = null;
-    let pendingVal = null;
-    let justEvaled = false;
-
-    function updateDisplay(val) {
-      document.getElementById('result').textContent = val;
-    }
-
-    function updateExpression(val) {
-      document.getElementById('expression').textContent = val;
-    }
-
-    function appendNum(n) {
-      if (justEvaled) { current = ''; justEvaled = false; }
-      current += n;
-      updateDisplay(current);
-    }
-
-    function appendDot() {
-      if (justEvaled) { current = '0'; justEvaled = false; }
-      if (!current.includes('.')) current += (current === '' ? '0' : '') + '.';
-      updateDisplay(current);
-    }
-
-    function appendOp(op) {
-      if (op === 'sqrt') {
-        const val = parseFloat(current || 0);
-        try {
-          const res = sqrt(val);
-          updateExpression(`√(${val})`);
-          current = String(res);
-          updateDisplay(current);
-          justEvaled = true;
-        } catch(e) { updateDisplay('Error'); current = ''; }
-        return;
-      }
-      if (op === '!') {
-        const val = parseFloat(current || 0);
-        try {
-          const res = factorial(val);
-          updateExpression(`${val}!`);
-          current = String(res);
-          updateDisplay(current);
-          justEvaled = true;
-        } catch(e) { updateDisplay('Error'); current = ''; }
-        return;
-      }
-      if (current !== '') {
-        if (pendingOp !== null) {
-          const a = pendingVal, b = parseFloat(current);
-          try {
-            let res;
-            if (pendingOp === '+') res = add(a, b);
-            else if (pendingOp === '-') res = subtract(a, b);
-            else if (pendingOp === '*') res = multiply(a, b);
-            else if (pendingOp === '/') res = divide(a, b);
-            pendingVal = res;
-            current = '';
-            updateDisplay(res);
-          } catch(e) { updateDisplay('Error'); clearAll(); return; }
-        } else {
-          pendingVal = parseFloat(current);
-          current = '';
-        }
-      }
-      pendingOp = op;
-      updateExpression(`${pendingVal} ${op === '*' ? '×' : op === '/' ? '÷' : op}`);
-      justEvaled = false;
-    }
-
-    function calculate() {
-      if (pendingOp === null || current === '') return;
-      const a = pendingVal, b = parseFloat(current);
-      try {
-        let res;
-        if (pendingOp === '+') res = add(a, b);
-        else if (pendingOp === '-') res = subtract(a, b);
-        else if (pendingOp === '*') res = multiply(a, b);
-        else if (pendingOp === '/') res = divide(a, b);
-        updateExpression(`${a} ${pendingOp === '*' ? '×' : pendingOp === '/' ? '÷' : pendingOp} ${b} =`);
-        current = String(res);
-        updateDisplay(current);
-        pendingOp = null;
-        pendingVal = null;
-        justEvaled = true;
-      } catch(e) { updateDisplay('Error'); clearAll(); }
-    }
-
-    function clearAll() {
-      current = '';
-      pendingOp = null;
-      pendingVal = null;
-      justEvaled = false;
-      updateDisplay('0');
-      updateExpression('');
-    }
-
-    function toggleSign() {
-      if (current !== '' && current !== '0') {
-        current = current.startsWith('-') ? current.slice(1) : '-' + current;
-        updateDisplay(current);
-      }
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
